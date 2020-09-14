@@ -30,6 +30,10 @@ int itob(int decimal) {
 	return res;
 }
 
+//
+bool div5(int x) {
+	return x%5==0;
+}
 int main() {
 	//-----------------1.string-----------------------
 	//cout << "请输入字符串：" << endl;
@@ -53,28 +57,53 @@ int main() {
 	//cout << endl;
 	
 	//-----------------2.vector-----------------------
-	//vector<int> a;//定义一个空vector
-	//a.push_back(5);//追加
-	//a.push_back(6);
-	//a.resize(5);//大小通过补0变为10
-	//a.erase(a.begin());//删除第一个
-	//cout << "a现在的大小为：" << a.size() << endl;
-	//for (auto x : a) cout << x << ' ';//基于范围的循环
-	//cout << endl;
+	vector<int> a;//定义一个空vector
+	a.push_back(5);//追加
+	a.push_back(6);
+	a.resize(5);//大小通过补0变为10
+	a.erase(a.begin());//删除第一个
+	cout << "a现在的大小为：" << a.size() << endl;
+	cout << "输出a:" << endl;
+	for (auto x : a) cout << x << ' ';//基于范围的循环
+	cout << endl;
 
-	//vector<int> b(4, 6);//长度4，初始都为6
-	//vector<int> c(4);//长度4，初始都为0
-	//vector<int> d{ 3,1,4,1,5,9,2,6 };//直接定义+初始化
-	//cout << "输入一个长度为4的数组b：";
-	//for (int i = 0;i < 4;i++) {
-	//	cin >> b[i];
-	//}
-	//cout << "打印b1:" << b[1] << endl;
-	//cout << "打印b2:" << b.at(2) << endl;
-	//sort(b.begin(), b.end(), greater<int>());//第三个参数为比较器,不写默认从小到大
-	//cout << "从大到小怕排序后输出:";
-	//for (auto x : b) cout << x << ' ';
-	//cout << endl;
+	vector<int> b(8, 6);//长度8，初始都为6
+	vector<int> c(4);//长度4，初始都为0
+	vector<int> d{ 3,1,4,1,5,9,2,6 };//直接定义+初始化
+	cout << "输入一个长度为8的数组b：";
+	for (int i = 0;i < 8;i++) {
+		cin >> b[i];
+	}
+	cout << "打印b1:" << b[1] << endl;
+	cout << "打印b2:" << b.at(2) << endl;
+	sort(b.begin(), b.end(), greater<int>());//第三个参数为比较器,不写默认从小到大
+	cout << "将b排序后输出:";
+	for (auto x : b) cout << x << ' ';
+	cout << endl;
+
+	//find函数
+	int val;
+	cout << "请输入查找目标:";
+	cin >> val;
+	auto it = find(b.begin(), b.end(), val);
+	if (it != b.end())
+		cout << val << "的位置是:" << it - b.begin() << endl;
+	else
+		cout << "未找到" << endl;
+
+	//find_if函数
+	auto itif = find_if(b.begin(), b.end(), div5);
+	if (itif != b.end())
+		cout << "能被5整除的位置是:" << itif - b.begin() << endl;
+	else
+		cout << "b中没有能被5整除的数" << endl;
+
+	//find_first_of函数
+	auto itof = find_first_of(b.begin(), b.end(), a.begin(), a.end());
+	if (itof != b.end())
+		cout << "b中第一次出现a的位置是:" << itof - b.begin() << endl;
+	else
+		cout << "b未找到a中的元素" << endl;
 
 	//-----------------3.stack-----------------------
 	//stack<int> s;//定义一个空stack
