@@ -11,7 +11,8 @@
 #include<set>//树状结构,有序
 #include<unordered_set>//哈希结构,无序,快
 #include<deque>//可从头插也可从尾插
-#include<list>
+#include<list>//双向链表,访问头部和尾部速度很快,不支持随机访问元素
+#include<forward_list>//单向,访问头部很快
 
 using namespace std;
 
@@ -31,10 +32,6 @@ int itob(int decimal) {
 	return res;
 }
 
-//
-bool div5(int x) {
-	return x%5==0;
-}
 int main() {
 	//-----------------0.array-----------------------
 	//array常和C语言的接口/函数互用,知道最大大小 可考虑用array,
@@ -110,7 +107,7 @@ int main() {
 	//	cout << "未找到" << endl;
 
 	////find_if函数
-	//auto itif = find_if(b.begin(), b.end(), div5);
+	//auto itif = find_if(b.begin(), b.end(), [](auto x) {return x % 5 == 0;});
 	//if (itif != b.end())
 	//	cout << "能被5整除的位置是:" << itif - b.begin() << endl;
 	//else
@@ -122,6 +119,7 @@ int main() {
 	//	cout << "b中第一次出现a的位置是:" << itof - b.begin() << endl;
 	//else
 	//	cout << "b未找到a中的元素" << endl;
+
 
 	//-----------------3.stack-----------------------
 	//stack<int> s;//定义一个空stack
@@ -174,7 +172,7 @@ int main() {
 	//cout << q.size() << endl;
 
 	//-----------------5.map-----------------------
-	//map<int, int> m;//有序的树状结构
+	//map<int, int> m;//有序的二叉树状结构
 	//m[6] = 3;
 	//m[4] = 9;
 	//m[5] = 2;
@@ -196,11 +194,13 @@ int main() {
 
 
 	//-----------------6.set-----------------------
-	//set<int> s;
+	//需要频繁插入删除时考虑 O(log(n))
+	//set<int> s; //无重复,自动排序
+	//s.insert(5);
 	//s.insert(3);
 	//s.insert(3);
 	//s.insert(4);
-	//cout << s.size() << endl;//无重复
+	//cout << s.size() << endl;
 	//for (auto x : s) cout << x << ' ';
 	//cout << endl;
 
@@ -226,12 +226,37 @@ int main() {
 
 	//-----------------8.list-----------------------
 	//list<int> li;
+	//li.push_back(3);
 	//li.push_back(6);
+	//li.push_back(3);
+	//li.push_back(3);
+	//li.push_back(4);
+	//li.push_front(5);
 	//li.push_front(5);
 	//li.insert(++li.begin(), 7);
+	//li.remove(5);//删除全部的5
+	//li.remove_if([](auto v) {return v > 6;});//条件删除
 	//for (auto x : li) cout << x << ' ';
 	//cout << endl;
 
+	//li.reverse();//反转
+	//for (auto x : li) cout << x << ' ';
+	//cout << endl;
+
+	//li.unique();//给连续一样的数去重
+	//for (auto x : li) cout << x << ' ';
+	//cout << endl;
+
+	//li.sort();
+	//for (auto x : li) cout << x << ' ';
+	//cout << endl;
+	
+
+	//-----------------8.list-----------------------
+	//forward_list<int> fli;
+	//fli.push_front(5);
+	//for (auto x : fli) cout << x << ' ';
+	//cout << endl;
 
 	return 0;
 }
